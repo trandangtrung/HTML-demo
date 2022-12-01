@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demo Javascript</title>
+    <script>
+        // alert("Ahihi"); // Bật ra cửa sổ popup hiển thị dòng chữ Ahihi
+        // System.out.println("Blah blah....");
+        document.write("Hệ thống đào tạo LTV quốc tế Bachkhoa-Aptech");
+    </script>
+    <script src="my_script.js"></script>
+    <style>
+        .box {
+            width: 100px;
+            height: 100px;
+            border: 1px solid red;
+        }
+
+        .myButton {
+            width: 100px;
+            line-height: 50px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Demo Javascript</h1>
+    <button onclick="tinhDienTich()">Tính diện tích hình vuông</button>
+    <span id="boxResult" style="color: blue; font-size: 1.5em;">sdfsfsd</span>
+    <br>
+    <div id="mybox" class="box" onmousemove="onIncrease()" onmouseout="onRevert()"></div>
+    <hr>
+    <h1>Bạn có NGU (Never Give Up) không?</h1>
+    <button id="btnYes" class="myButton" onclick="actionMessage()">Có</button>
+    <button id="btnNo" class="myButton" onmousemove="actionNo()" onmouseout="actionNoRevert()"
+        onclick="actionMessage()">Không</button>
+    <br>
+    <script>
+        document.writeln("BKAP đã đào tạo trên <b>30.000</b> lập trình <h2>viên</h2> từ năm 2003");
+        // Khai báo biến
+        var fullname = "Ivan Xách Xô Vôi";
+        let age = 21;
+        var status = true;
+        // var # let: ở cấp độ truy cập
+        // Kiểu dữ liệu (cơ bản + tham chiếu)
+        // Cơ bản: interger, float/double, string, null, boolean
+        // Tham chiếu: object / function
+        document.write("<br>Chào bạn " + fullname);
+        hello(); // Gọi hàm được viết ở file bên ngoài
+        // Mệnh đề điều kiện: If-Else / Switch-Case
+        // Vòng lặp: while / do-while / for (foreach, for-in, for of)      
+        // let myConfirm = confirm("Trang web 18+ - bạn đã đủ tuổi chưa?"); // Hiển thị popup hỏi >>> Yes/No 
+        // if (myConfirm) {
+        //     document.write("<h1>Ok, đủ tuổi truy cập</h1>");
+        // } else {
+        //     // Chuyển hướng về trang google
+        //     window.location = "http://www.google.com";
+        // }
+        function validate() { 
+            let fullname = document.forms["formReg"]["txtFullname"].value;
+            let bkClass = document.forms["formReg"]["txtClass"].value;
+            let boxErr = document.getElementById("boxErr");
+
+            if (fullname.length < 3 || fullname.length > 20) {
+                boxErr.innerHTML = "Họ và tên phải có từ 3-20 ký tự";
+                return false; // Không submit form đi
+            }
+
+            // Biểu thức quy tắc REGEXP
+            const pattern = /^JW([0-9]){4}[GHIJM]([L])*$/g; // Tên lớp JW2210M
+            // [a-zA-Z]: viết ký tự thường hay hoa đều được
+            // [GHIJM]: chỉ được phép là các ký tự trên
+            // {3}: phải có 3 phần tử
+            // {3,5}: tối thiểu là 3 và tối đa 5
+            // {3,}: tối thiểu là 3
+            let isOk = pattern.test(bkClass);
+            if (isOk == false) {
+                boxErr.innerHTML = "Tên lớp nhập không hợp lệ";
+                return false; // Không submit form đi
+            } 
+
+            return true; // Ok thì mới gửi dữ liệu form đi
+        }
+
+    </script>
+    <hr>
+    <h1>Demo Mảng Javascript</h1>
+    <span id="boxErr" style="color: red;"></span>
+    <form id="formReg" action="success.html" method="post" onsubmit="return validate()">
+        <input type="text" name="txtFullname" id="txtFullname" placeholder="Nguyễn Văn A"><br>
+        <input type="text" name="txtClass" id="txtClass" placeholder="Lớp đăng ký học"><br>
+        <input type="submit" value="Đăng ký">
+    </form>
+
+    <script>
+        let arrSv = ["Hương", "Bách", "Huệ", "Lụa", "Tùng", "An"];
+        let myArr = [9, 3, 5, 1, 2, 8];
+        // myArr.push(11);
+        myArr.sort(function (a, b) { return a - b }); // sắp xếp mảng số
+        document.write("<br><br>Mảng số trước khi sắp xếp");
+        document.write(myArr.toString());
+        document.write("<br><br>Mảng số sau khi sắp xếp");
+        for (let i = 0; i < myArr.length; i++) {
+            const element = myArr[i]; // final <=> const >>> hằng số
+            document.write(element + " - ");
+        }
+
+        document.write("<br>Trước khi sắp xếp<br>");
+        document.write(arrSv.join("<br>"));
+        // Sắp xếp
+        document.write("<br>SAU khi sắp xếp<br>");
+        arrSv.sort();
+        document.write(arrSv.join("<br>"));
+        document.write("<br><br>Sử dụng for-in");
+        for (const key in arrSv) {
+            document.write("Key: " + key + " / ");
+        }
+
+        document.write("<br><br>Sử dụng for-of");
+        for (const item of arrSv) {
+            document.write("Item: " + item + " / ");
+        }
+
+        // Khai báo đối tượng
+        var student = {
+            fullname: "Mai Phương Thúy",
+            age: 23,
+            address: "Lai Châu",
+            meries: false
+        }
+        let info = "";
+        info += "<br>Họ và tên: " + student.fullname;
+        info += "<br>Tuổi: " + student.age;
+        info += "<br>Địa chỉ: " + student.address;
+        info += "<br>Tình trạng hôn nhân: " + (student.meries ? "Đã lập gia đình" : "Độc thân");
+        document.write("<h1>" + info + "</h1>");
+    </script>
+</body>
+
+</html>
